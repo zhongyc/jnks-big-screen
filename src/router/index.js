@@ -1,17 +1,14 @@
-import { createRouter, createWebHashHistory } from "vue-router";
-import HomeView from "../views/Home/index.vue";
-
-const routes = [
-  {
-    path: "/",
-    name: "home",
-    component: HomeView,
-  },
-];
+import { createRouter, createWebHistory } from 'vue-router'
 
 const router = createRouter({
-  history: createWebHashHistory(),
-  routes,
-});
+    history: createWebHistory(import.meta.env.VITE_BASE_BASE),
+    routes: [
+        {
+            path: '/',
+            name: 'HOME',
+            component: () => import('@/views/Home/index.vue'),
+        },
+    ]
+})
 
-export default router;
+export default router

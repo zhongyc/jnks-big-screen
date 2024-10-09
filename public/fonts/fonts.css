@@ -1,0 +1,13 @@
+@font-face {
+  font-family: 'DigifaceWide';
+  src: url('/fonts/DigifaceWideRegular.ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'PingFang SC';
+  src: url('/fonts/PingFangSCRegular.ttf');
+  font-weight: normal;
+  font-style: normal;
+}

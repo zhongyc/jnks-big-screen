@@ -1,0 +1,53 @@
+//引入清除默认样式
+@import './reset.scss';
+.amap-logo {
+    display: none !important; //去掉高德地图logo
+}
+
+.amap-copyright {
+    opacity: 0 !important; //去掉高德的版本号
+}
+
+// 地图加载时 闪白屏问题
+.amap-container {
+    background-color: transparent !important;
+}
+
+// 怪异盒
+.box-sizing {
+    box-sizing: border-box;
+}
+
+// 单行文本溢出显示省略号
+.text-ellipsis {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+// 多行文本溢出显示省略号
+.text-multi-ellipsis {
+    display: -webkit-box;
+    line-clamp: 2;
+    /* 指定最多显示多少行 */
+    -webkit-line-clamp: 2;
+    /* 指定最多显示多少行 */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+//滚动条外观设置
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+::-webkit-scrollbar-track {
+    background: $common-color;
+}
+
+::-webkit-scrollbar-thumb {
+    width: 5px;
+    background-color: #1e4a75;
+    border-radius: 10px;
+}

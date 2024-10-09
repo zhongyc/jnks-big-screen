@@ -1,0 +1,388 @@
+/* input 输入框 */
+.el-input__wrapper,
+.el-textarea__inner,
+.el-select__wrapper {
+    color: #fff;
+    background-color: $input-background-color;
+    border: 1px solid $input-border-color;
+    box-shadow: none;
+}
+.el-input.is-disabled .el-input__inner,
+.el-select__wrapper.is-disabled .el-select__selected-item {
+    color: #fff;
+    -webkit-text-fill-color: #fff;
+}
+.el-input__wrapper.is-focus,
+.el-input__wrapper:hover,
+.el-textarea__inner:focus,
+.el-textarea__inner:hover {
+    box-shadow: none;
+}
+
+.el-input__wrapper::placeholder,
+.el-textarea__inner::placeholder {
+    color: $input-placeholder-color;
+}
+
+.el-input__inner {
+    color: $text-color;
+}
+
+.el-input-group__append,
+.el-input-group__prepend {
+    background-color: $input-background-color;
+    color: $text-color;
+    border: 1px solid $input-border-color;
+    box-shadow: none;
+}
+
+.el-input-group--prepend .el-input-group__prepend .el-select .el-select__wrapper,
+.el-input-group--append .el-input-group__append .el-select .el-select__wrapper {
+    box-shadow: none;
+}
+
+/* select 选择器 */
+.el-select__wrapper {
+    color: $text-color;
+    background-color: $input-background-color;
+    border: 1px solid $input-border-color;
+    box-shadow: none;
+    min-height: 34px;
+}
+
+.el-select__wrapper:hover,
+.el-select__wrapper.is-focused,
+.el-select__wrapper.is-focus,
+.el-select__wrapper.is-hovering:not(.is-focused) {
+    box-shadow: none;
+}
+
+// Cascader 级联选择器
+.el-cascader-menu {
+    border-right: none;
+    color: $text-color;
+}
+
+.el-cascader-node:not(.is-disabled):focus,
+.el-cascader-node:not(.is-disabled):hover {
+    background-color: $popover-hover-background-color;
+}
+
+/* 下拉框 */
+.el-popper.is-light {
+    background-color: $popover-background-color;
+    border: transparent;
+}
+
+.el-select__placeholder {
+    color: $text-color;
+}
+
+.el-select-dropdown__item {
+    color: $text-color;
+}
+
+.el-select-dropdown__item.is-hovering {
+    background-color: $popover-hover-background-color;
+}
+
+.el-autocomplete-suggestion li {
+    color: $text-color;
+}
+
+.el-autocomplete-suggestion li:hover {
+    background-color: $popover-hover-background-color;
+}
+
+.el-popper.is-light .el-popper__arrow:before {
+    background: $popover-background-color;
+    border: 1px solid $input-border-color;
+}
+
+/* 时间选择器 */
+.el-picker-panel {
+    background-color: $popover-background-color;
+    color: $text-color;
+}
+
+.el-picker-panel [slot='sidebar'],
+.el-picker-panel__sidebar {
+    background-color: $popover-background-color;
+}
+
+.el-date-editor .el-range-input,
+.el-date-editor .el-range-separator {
+    color: $input-placeholder-color;
+}
+
+.el-range-editor.is-active,
+.el-range-editor.is-active:hover,
+.el-date-editor.el-input__wrapper,
+.el-date-editor.el-input__wrapper:hover {
+    box-shadow: none;
+}
+
+.el-date-picker__time-header {
+    border-bottom-color: $time-picker-border-color;
+}
+
+.el-picker-panel .el-time-panel {
+    background-color: $popover-background-color;
+    border: none;
+}
+
+.el-time-spinner__item {
+    color: $text-color;
+}
+
+.el-time-panel__footer {
+    border-top-color: $time-picker-border-color;
+}
+
+.el-date-table td.in-range .el-date-table-cell,
+.el-date-table td.in-range .el-date-table-cell:hover {
+    background-color: $popover-hover-background-color;
+}
+
+.el-picker-panel__shortcut {
+    color: $text-color;
+}
+
+.el-picker-panel__footer {
+    background-color: $popover-background-color;
+    border-top-color: $time-picker-border-color;
+    color: $text-color;
+}
+
+.el-button.is-text:not(.is-disabled):hover {
+    background-color: transparent;
+}
+
+.el-button.is-text {
+    color: $text-color;
+}
+
+.el-date-picker__header-label,
+.el-picker-panel__icon-btn,
+.el-date-table th,
+.el-month-table td .cell {
+    color: $text-color;
+}
+
+.el-time-spinner__item:hover:not(.is-disabled):not(.is-active) {
+    color: $text-select-color;
+    background: transparent;
+}
+
+.el-time-spinner__item.is-active:not(.is-disabled) {
+    color: $text-select-color;
+}
+
+.el-time-panel__btn {
+    color: $text-color;
+}
+
+.el-input.is-disabled .el-input__wrapper {
+    background-color: $popover-background-color;
+    color: $text-color;
+    box-shadow: none;
+}
+
+.el-date-range-picker__content.is-left {
+    border-right-color: $time-picker-border-color;
+}
+
+.el-date-range-picker__time-header {
+    border-bottom-color: $time-picker-border-color;
+}
+
+/* 单选框 */
+.el-checkbox {
+    color: $text-color;
+}
+
+.el-checkbox__inner {
+    background: transparent;
+    border-color: $text-select-color;
+}
+
+.el-checkbox__input.is-checked + .el-checkbox__label {
+    color: $text-color;
+}
+
+.el-radio {
+    color: $text-color;
+}
+
+.el-radio__input.is-checked + .el-radio__label {
+    color: $text-color;
+}
+
+/* 表格 */
+// 表格样式
+.el-table {
+    // 背景颜色
+    background-color: $table-background-color;
+    --el-table-border-color: rgba(9, 64, 94, 1);
+
+    tr {
+        background-color: transparent;
+    }
+
+    // 表格行
+    th.el-table__cell {
+        background-color: $table-row-background-color;
+    }
+
+    td.el-table__cell,
+    th.el-table__cell.is-leaf {
+        border-bottom-color: $table-border-color;
+        padding: 12px 0;
+    }
+
+    .el-scrollbar {
+        background: transparent;
+    }
+
+    // 单行
+    .el-table__row {
+        font-size: 14px;
+        font-weight: 500;
+        color: #fff;
+        background-color: $table-row-background-color;
+    }
+
+    th.table_header {
+        // 自定义表头颜色
+        color: $text-color;
+        font-weight: 500;
+        background-color: $table-title-background-color;
+    }
+}
+
+/* 滚动条样式 */
+.el-table ::-webkit-scrollbar {
+    width: 17px;
+}
+
+.el-table ::-webkit-scrollbar-thumb {
+    background-color: $table-scrollbar-background-color;
+    //   border-radius: 5px;
+}
+
+.el-table ::-webkit-scrollbar-track {
+    background-color: $table-scrollbar-background-color;
+}
+
+.el-table ::-webkit-scrollbar-thumb:hover {
+    background-color: $table-scrollbar-thumb-color;
+}
+
+.el-table ::-webkit-scrollbar-thumb:active {
+    background-color: $table-scrollbar-thumb-color;
+}
+
+.el-table ::-webkit-scrollbar-corner {
+    background-color: $table-scrollbar-thumb-color;
+}
+
+// .el-table__body {
+//     margin-bottom: 1%;
+// }
+
+/* 用来设置当前页面element全局table 鼠标移入某行时的背景色*/
+.el-table--enable-row-hover .el-table__body tr:hover > td {
+    background-color: $table-hover-background-color;
+}
+
+.el-table__body tr.current-row > td.el-table__cell {
+    background-color: $table-hover-background-color;
+}
+
+.el-table--enable-row-hover .el-table__body tr:hover > td.el-table__cell {
+    background-color: $table-hover-background-color;
+}
+
+.el-table::before {
+    content: '';
+    position: absolute;
+    background-color: transparent;
+    z-index: 1;
+}
+
+// 分页
+.equipment-table-pagination {
+    display: flex;
+    justify-content: center;
+}
+
+// .el-input__inner {
+//     height: 22px;
+//     font-size: 12px;
+// }
+.el-pager li {
+    background: none;
+    color: $text-color;
+}
+
+.el-pagination.is-background .el-pager li:not(.disabled).active,
+.el-pagination.is-background .el-pager li.is-active {
+    background: none;
+    color: $pagination-text-select-color;
+}
+
+.el-pagination .btn-next,
+.el-pagination .btn-prev {
+    background: none !important;
+    color: $text-color;
+}
+
+.el-pagination button,
+.el-pagination span {
+    font-size: 14px;
+    color: $text-color;
+}
+
+.el-pagination.is-background .el-pager li {
+    background-color: transparent;
+}
+
+.table-pagination {
+    background-color: $popover-background-color;
+    border: transparent;
+
+    .el-select-dropdown__item {
+        color: $text-color;
+    }
+
+    .el-select-dropdown__item.selected {
+        color: $text-select-color;
+    }
+
+    .el-select-dropdown__item.selected,
+    .el-select-dropdown__item.hover,
+    .el-select-dropdown__item:hover {
+        background-color: $popover-hover-background-color;
+    }
+}
+
+.table-pagination.el-popper[x-placement^='top'] .popper__arrow {
+    border-top-color: $popover-background-color;
+}
+
+.table-pagination.el-popper[x-placement^='top'] .popper__arrow::after {
+    border-top-color: $popover-background-color;
+}
+
+.el-message-box {
+    background-color: $popover-background-color;
+    border: 1px solid $input-border-color;
+    color: $text-color;
+}
+.el-message-box__title {
+    font-size: 20px;
+    color: $text-select-color;
+}
+.el-message-box__message {
+    color: $text-color;
+}
