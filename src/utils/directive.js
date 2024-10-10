@@ -1,8 +1,10 @@
 import drag from './drag' // 引入指令
+import whetherTooltip from './whether-tooltip'
 
 const directives = {
     // 指令对象
-    drag
+    drag,
+    whetherTooltip
 }
 
 export default {

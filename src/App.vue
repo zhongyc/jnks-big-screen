@@ -1,6 +1,6 @@
 <script setup>
 import { onMounted } from 'vue'
-import { useIndustryStore } from '@/store/app' // pinia 导航
+import { useIndustryStore } from '@/store/app.js'
 const industryStore = useIndustryStore()
 
 onMounted(() => {

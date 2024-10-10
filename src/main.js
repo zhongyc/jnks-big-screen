@@ -17,14 +17,14 @@ import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 import 'element-plus/dist/index.css'
 import zhCn from 'element-plus/dist/locale/zh-cn.mjs'
 import { message } from './utils/resetMessage.js'
-import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
+// import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 import directives from '@/utils/directive.js'
 //高德地图securityJsCode
 window._AMapSecurityConfig = {
     securityJsCode: '092fb44211229b72aa112eb7dc87f86b'
 }
-const pinia = createPinia()
-pinia.use(piniaPluginPersistedstate)
+// const pinia = createPinia()
+// pinia.use(piniaPluginPersistedstate)
 const app = createApp(App)
 // 注册elementplus 图标
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
@@ -41,7 +41,7 @@ app.provide('playAudio', function (fileName) {
 })
 app.provide('$message', message)
 
-app.use(pinia)
+app.use(createPinia())
 app.use(ElementPlus, {
     locale: zhCn
 })

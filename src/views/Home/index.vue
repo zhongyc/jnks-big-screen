@@ -1,24 +1,29 @@
 <!--
  * @Author: liz
  * @Date: 2024-10-08 09:43:03
- * @LastEditTime: 2024-10-09 09:55:40
+ * @LastEditTime: 2024-10-10 14:15:25
  * @LastEditors: liz
- * @Description: 
+ * @Description: 仪表盘
  * @FilePath: \jnks-big-screen\src\views\Home\index.vue
 -->
 <template>
     <div class="container-box">
-        <div class="container">
-            <div v-for="item in urlList" :key="item.uid" class="content">
-                <div class="empty-box">
+        <div class="container" :class="`container-${layoutExamplesId}`">
+            <div
+                v-for="item in urlList"
+                :key="item.uid"
+                class="content"
+                :class="`content-${item.index}`"
+            >
+                <div v-if="!item.show" class="empty-box">
                     <el-empty description="暂无选择" />
                 </div>
-                <!-- <iframe
-            src="about: blank"
-            :id="item.id"
-            frameborder="0"
-            @load="adjustIframe(item)"
-            ></iframe> -->
+                <iframe
+                    :id="`bi_iframe_${item.index}`"
+                    :src="item.url == '' ? 'about:blank' : item.url"
+                    frameborder="0"
+                    @load="adjustIframe(item)"
+                ></iframe>
             </div>
         </div>
         <el-drawer
@@ -28,91 +33,87 @@
             :with-header="false"
             class="drawer-box"
         >
-            <div class=""></div>
+            <LayoutConfiguration
+                v-if="drawer"
+                ref="layoutConfiguration"
+                @change-layout="configureLayout"
+            />
         </el-drawer>
-        <div class="options-box" @click="configureLayout"></div>
+        <div class="options-box" @click="configureLayout(true)"></div>
     </div>
 </template>
 
 <script setup>
-import { onMounted, ref } from 'vue'
-const layoutOption = [
-    {
-        name: '1:1',
-        value: '1:1'
-    },
-    {
-        name: '2:1',
-        value: '2:1'
-    },
-    {
-        name: '3:1',
-        value: '3:1'
-    }
-]
-const urlList = [
-    {
-        url: 'https://www.zjjnks.cn/swat/hangzhou/',
-        id: 'bi_iframe_1',
-        uid: 1
-    },
-    {
-        url: 'https://www.zjjnks.cn/swat/wenzhou/',
-        id: 'bi_iframe_2',
-        uid: 2
-    },
-    {
-        url: 'https://www.zjjnks.cn/swat/hangzhou/',
-        id: 'bi_iframe_3',
-        uid: 3
-    },
-    {
-        url: 'https://www.zjjnks.cn/keyArea',
-        id: 'bi_iframe_4',
-        uid: 4
-    },
-    {
-        url: 'https://www.zjjnks.cn/keyArea',
-        id: 'bi_iframe_5',
-        uid: 5
-    },
-    {
-        url: 'http://10.1.0.5:5173/zsCompany/',
-        id: 'bi_iframe_6',
-        uid: 6
-    },
-    {
-        url: 'http://10.1.0.5:5173/zsCompany/',
-        id: 'bi_iframe_7',
-        uid: 7
-    },
-    {
-        url: 'http://10.1.0.5:5173/zsCompany/',
-        id: 'bi_iframe_8',
-        uid: 8
-    },
-    {
-        url: 'http://10.1.0.5:5173/zsCompany/',
-        id: 'bi_iframe_9',
-        uid: 9
-    }
-]
-onMounted(() => {})
+import { ref, onMounted, watch, onBeforeUnmount } from 'vue'
+import LayoutConfiguration from './layoutConfiguration.vue'
+import { useIndustryStore } from '@/store/app.js'
+const industryStore = useIndustryStore()
 
+const debounceReload = debounce(() => {
+    location.reload()
+}, 200)
+
+watch(
+    () => industryStore.pageSize.pageHeight,
+    () => {
+        debounceReload()
+    }
+)
+watch(
+    () => industryStore.pageSize.pageWidth,
+    () => {
+        debounceReload()
+    }
+)
+const layoutExamplesId = ref('1')
+const urlList = ref([
+    {
+        uid: 1,
+        index: 1,
+        url: '',
+        platformName: '',
+        bgUrl: '',
+        show: false
+    },
+    {
+        uid: 2,
+        index: 2,
+        url: '',
+        platformName: '',
+        bgUrl: '',
+        show: false
+    },
+    {
+        uid: 3,
+        index: 3,
+        url: '',
+        platformName: '',
+        bgUrl: '',
+        show: false
+    },
+    {
+        uid: 4,
+        index: 4,
+        url: '',
+        platformName: '',
+        bgUrl: '',
+        show: false
+    }
+])
 /**
  * @description: 自适应布局
  * @param {*} info
  */
 const adjustIframe = info => {
     setTimeout(() => {
-        let iframe = document.getElementById(info.id)
-        if (iframe.src == 'about: blank') {
-            iframe.src = info.url
-        } else {
+        let iframe = document.getElementById(`bi_iframe_${info.index}`)
+        if (iframe.src != 'about:blank') {
+            let parentContainer = document.querySelector(`.content-${info.index}`)
             //   获取父级容器的宽高
             //也就是弹框在样式中设置的高宽 最好给固定值 在这里可以直接拿到
-            let containerWidth = window.innerWidth / 3
-            let containerHeight = window.innerHeight / 3
+            let containerWidth = parentContainer.offsetWidth
+            let containerHeight = parentContainer.offsetHeight
+
             // 计算缩放比例
             let scaleWidth = containerWidth / window.innerWidth
             let scaleHeight = containerHeight / window.innerHeight
@@ -124,12 +125,62 @@ const adjustIframe = info => {
             // 但由于我们使用了scale，所以通常不需要这样做
             iframe.style.width = `${window.innerWidth}px`
             iframe.style.height = `${window.innerHeight}px`
+            if (!info.show && info.url != '') {
+                urlList.value.map(item => {
+                    if (item.uid === info.uid) {
+                        info.show = true
+                    }
+                })
+            }
         }
-    }, 1000)
+    }, 500)
 }
 const drawer = ref(false)
-const configureLayout = () => {
-    drawer.value = true
+const layoutConfiguration = ref()
+const configureLayout = (type, isReload = false) => {
+    drawer.value = type
+    if (!type && isReload) {
+        let configurationList = localStorage.getItem(
+            'command_room_big_screnn_layout_configuration_list'
+        )
+        let configurationId = localStorage.getItem(
+            'command_room_big_screnn_layout_configuration_id'
+        )
+        if (configurationList && configurationList.length > 10) {
+            urlList.value = []
+            urlList.value = JSON.parse(configurationList)
+            layoutExamplesId.value = configurationId
+            setTimeout(() => {
+                location.reload()
+            }, 200)
+        }
+    }
+}
+onMounted(() => {
+    let configurationList = localStorage.getItem(
+        'command_room_big_screnn_layout_configuration_list'
+    )
+    let configurationId = localStorage.getItem('command_room_big_screnn_layout_configuration_id')
+    if (configurationList && configurationList.length > 10) {
+        urlList.value = []
+        urlList.value = JSON.parse(configurationList)
+        layoutExamplesId.value = configurationId
+    }
+})
+// 组件卸载时清理定时器
+onBeforeUnmount(() => {
+    clearTimeout(debounceReload.timeout)
+})
+function debounce(func, wait) {
+    let timeout
+    return function () {
+        const context = this
+        const args = arguments
+        clearTimeout(timeout)
+        timeout = setTimeout(() => {
+            func.apply(context, args)
+        }, wait)
+    }
 }
 </script>
 
@@ -140,11 +191,6 @@ const configureLayout = () => {
     .container {
         width: 100%;
         height: 100%;
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        grid-template-rows: repeat(3, 1fr);
-        grid-column-gap: 0px;
-        grid-row-gap: 0px;
         background-color: $bg-color;
         position: relative;
         .content {
@@ -160,10 +206,23 @@ const configureLayout = () => {
                 position: absolute;
                 top: 50%;
                 left: 50%;
+                z-index: 2;
                 /* 初始不应用缩放 */
                 transform: none;
                 transition: transform 0.2s ease;
                 /* 可选的过渡效果 */
+            }
+            .empty-box {
+                width: 100%;
+                height: 100%;
+                background-color: $bg-color;
+                display: flex;
+                flex-direction: row;
+                flex-wrap: nowrap;
+                align-items: center;
+                justify-content: center;
+                position: absolute;
+                z-index: 10;
             }
         }
     }
@@ -174,13 +233,148 @@ const configureLayout = () => {
         position: absolute;
         top: 50%;
         right: 0;
+        z-index: 20;
         transform: translate(-50%, -50%);
         cursor: pointer;
+    }
+    .container-1 {
+        /* 设置元素为网格容器 */
+        display: grid;
+        /* 定义2列，每列宽度为1fr（分数单位），即三等分可用空间 */
+        grid-template-columns: repeat(2, 1fr);
+        /* 定义2行，每行高度为1fr（分数单位），即三等分可用空间 */
+        grid-template-rows: repeat(2, 1fr);
+        /* 列与列之间有0像素的间隔 */
+        grid-column-gap: 0px;
+        /* 行与行之间有0像素的间隔 */
+        grid-row-gap: 0px;
+    }
+    .container-2 {
+        /* 设置元素为网格容器 */
+        display: grid;
+        /* 定义3列，每列宽度为1fr（分数单位），即三等分可用空间 */
+        grid-template-columns: repeat(3, 1fr);
+        /* 定义3行，每行高度为1fr（分数单位），即三等分可用空间 */
+        grid-template-rows: repeat(3, 1fr);
+        /* 列与列之间有0像素的间隔 */
+        grid-column-gap: 0px;
+        /* 行与行之间有1像素的间隔 */
+        grid-row-gap: 0px;
+        /* 定义内容区域的位置和大小 */
+        .content-1 {
+            /* 内容占据从第1行到第2行、从第1列到第2列的区域 */
+            grid-area: 1 / 1 / 3 / 3;
+        }
+        .content-2 {
+            /* 内容占据第1行、第3列的区域 */
+            grid-area: 1 / 3 / 2 / 4;
+        }
+        .content-3 {
+            /* 内容占据第2行、第3列的区域 */
+            grid-area: 2 / 3 / 3 / 4;
+        }
+        .content-4 {
+            /* 内容占据第3行、第3列的区域 */
+            grid-area: 3 / 3 / 4 / 4;
+        }
+        .content-5 {
+            /* 内容占据第3行、第2列的区域 */
+            grid-area: 3 / 2 / 4 / 3;
+        }
+        .content-6 {
+            /* 内容占据第3行、第1列的区域 */
+            grid-area: 3 / 1 / 4 / 2;
+        }
+    }
+    .container-3 {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(3, 1fr);
+        grid-column-gap: 0px;
+        grid-row-gap: 0px;
+        .content-1 {
+            grid-area: 1 / 1 / 2 / 2;
+        }
+        .content-2 {
+            grid-area: 2 / 1 / 3 / 2;
+        }
+        .content-3 {
+            grid-area: 1 / 2 / 3 / 4;
+        }
+        .content-4 {
+            grid-area: 3 / 1 / 4 / 2;
+        }
+        .content-5 {
+            grid-area: 3 / 2 / 4 / 3;
+        }
+        .content-6 {
+            grid-area: 3 / 3 / 4 / 4;
+        }
+    }
+    .container-4 {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(3, 1fr);
+        grid-column-gap: 0px;
+        grid-row-gap: 0px;
+        .content-1 {
+            grid-area: 1 / 1 / 2 / 2;
+        }
+        .content-2 {
+            grid-area: 1 / 2 / 2 / 3;
+        }
+        .content-3 {
+            grid-area: 1 / 3 / 2 / 4;
+        }
+        .content-4 {
+            grid-area: 2 / 1 / 4 / 3;
+        }
+        .content-5 {
+            grid-area: 2 / 3 / 3 / 4;
+        }
+        .content-6 {
+            grid-area: 3 / 3 / 4 / 4;
+        }
+    }
+    .container-5 {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(3, 1fr);
+        grid-column-gap: 0px;
+        grid-row-gap: 0px;
+        .content-1 {
+            grid-area: 1 / 1 / 2 / 2;
+        }
+        .content-2 {
+            grid-area: 1 / 2 / 2 / 3;
+        }
+        .content-3 {
+            grid-area: 1 / 3 / 2 / 4;
+        }
+        .content-4 {
+            grid-area: 2 / 1 / 3 / 2;
+        }
+        .content-5 {
+            grid-area: 3 / 1 / 4 / 2;
+        }
+        .content-6 {
+            grid-area: 2 / 2 / 4 / 4;
+        }
+    }
+    .container-6 {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(3, 1fr);
+        grid-column-gap: 0px;
+        grid-row-gap: 0px;
     }
 }
 </style>
 <style lang="scss">
 .drawer-box {
     background-color: $bg-color;
+}
+.el-button + .el-button {
+    margin-left: 0;
 }
 </style>
