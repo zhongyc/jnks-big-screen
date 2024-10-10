@@ -8,7 +8,9 @@
 -->
 <template>
     <div class="drawer-content">
-        <div class="title">布局预览</div>
+        <div class="title">
+            <div class="gradient_text">布局预览</div>
+        </div>
         <div class="layout-examples" :class="`layout-examples-${examplesLayoutOption}`">
             <div
                 v-for="item in urlList"
@@ -21,35 +23,58 @@
             </div>
         </div>
         <div class="layout-options">
-            <el-radio-group v-model="examplesLayoutOption" @change="changeLayout">
+            <!-- <el-radio-group v-model="examplesLayoutOption" @change="changeLayout">
                 <el-radio-button label="布局一" value="1" />
                 <el-radio-button label="布局二" value="2" />
-                <el-radio-button label="布局三" value="3" />
+                <el-radio-button label="布局二" value="3" />
                 <el-radio-button label="布局四" value="4" />
                 <el-radio-button label="布局五" value="5" />
                 <el-radio-button label="布局六" value="6" />
-            </el-radio-group>
+            </el-radio-group> -->
+            <template v-for="item in layoutList" :key="item.index">
+                <div class="layout_item" @click="changeLayoutType(item.index)">
+                    <img
+                        class="layout_img"
+                        :src="examplesLayoutOption == item.index ? item.activeUrl : item.url"
+                        alt=""
+                    />
+                    <div class="layout_title">{{ item.title }}</div>
+                </div>
+            </template>
         </div>
-        <div class="title">模块分配</div>
+        <div class="title"><div class="gradient_text">模块分配</div></div>
         <el-scrollbar class="layout-distribute-box">
-            <div v-for="item in urlList" :key="item.uid" class="box-li">
+            <div
+                v-for="item in urlList"
+                :key="item.uid"
+                class="box-li"
+                :class="item.platformName ? 'box-li-selected' : 'box-li-default'"
+            >
                 <div class="serial-number vertical-horizontal-center">
                     {{ '模块' + item.index }}
                 </div>
                 <div class="name text-ellipsis">{{ item.platformName }}</div>
-                <el-button type="primary" :icon="'Operation'" circle @click="configuration(item)" />
+                <img
+                    class="box-li-img"
+                    src="@/assets/img/detail.png"
+                    alt=""
+                    @click="configuration(item)"
+                    title="选择平台"
+                />
+                <!-- <el-button type="primary" :icon="'Operation'" circle @click="configuration(item)" /> -->
             </div>
         </el-scrollbar>
 
         <div class="footer-btn">
-            <el-button type="info" @click="operate(1)">取消</el-button>
-            <el-button type="primary" @click="operate(3)">应用</el-button>
+            <div class="cancel-btn" @click="operate(1)"></div>
+            <div class="apply-btn" @click="operate(3)"></div>
         </div>
+
         <!-- 模块分配抽屉 -->
         <el-drawer v-model="innerDrawer" append-to-body :with-header="false" class="drawer-box">
             <div class="inner-drawer-content">
                 <el-scrollbar class="platform-box">
-                    <el-radio-group
+                    <!-- <el-radio-group
                         v-model="platformId"
                         class="platform-list"
                         @change="changePlatform"
@@ -60,15 +85,38 @@
                             :value="item.platformId"
                             size="large"
                             class="box-li"
+                            :class="
+                                platformId == item.platformId
+                                    ? 'box-li-activebg'
+                                    : 'box-li-defaultbg'
+                            "
                         >
                             <div class="box-name">{{ item.platformName }}</div>
                             <img class="box-img" :src="require(item.bgUrl)" alt="" />
                         </el-radio>
-                    </el-radio-group>
+                    </el-radio-group> -->
+                    <div class="platform-list">
+                        <div
+                            v-for="item in platformList"
+                            :key="item.platformId"
+                            class="box-li"
+                            :class="
+                                platformId == item.platformId
+                                    ? 'box-li-activebg'
+                                    : 'box-li-defaultbg'
+                            "
+                            @click="onSelectPlat(item.platformId)"
+                        >
+                            <div class="box-name">{{ item.platformName }}</div>
+                            <img class="box-img" :src="require(item.bgUrl)" alt="" />
+                        </div>
+                    </div>
                 </el-scrollbar>
                 <div class="footer-btn">
-                    <el-button type="info" @click="operate(2)">取消</el-button>
-                    <el-button type="primary" @click="operate(4)">确认</el-button>
+                    <!-- 取消 -->
+                    <div class="cancel-btn" @click="operate(2)"></div>
+                    <!-- 确认呢 -->
+                    <div class="confirm-btn" @click="operate(4)"></div>
                 </div>
             </div>
         </el-drawer>
@@ -131,7 +179,8 @@ const urlList = ref([
 /**
  * @description: 切换布局
  */
-const changeLayout = () => {
+const changeLayoutType = index => {
+    examplesLayoutOption.value = index
     switch (Number(examplesLayoutOption.value)) {
         case 1:
             if (urlList.value.length > 4) {
@@ -359,6 +408,45 @@ const platformList = ref([
     //     bgUrl: 'jnksfkwz'
     // }
 ])
+
+const layoutList = ref([
+    {
+        url: require('img/layout-1.png'),
+        activeUrl: require('img/layout-active-1.png'),
+        title: '布局一',
+        index: 1
+    },
+    {
+        url: require('img/layout-2.png'),
+        activeUrl: require('img/layout-active-2.png'),
+        title: '布局二',
+        index: 2
+    },
+    {
+        url: require('img/layout-3.png'),
+        activeUrl: require('img/layout-active-3.png'),
+        title: '布局三',
+        index: 3
+    },
+    {
+        url: require('img/layout-4.png'),
+        activeUrl: require('img/layout-active-4.png'),
+        title: '布局四',
+        index: 4
+    },
+    {
+        url: require('img/layout-5.png'),
+        activeUrl: require('img/layout-active-5.png'),
+        title: '布局五',
+        index: 5
+    },
+    {
+        url: require('img/layout-6.png'),
+        activeUrl: require('img/layout-active-6.png'),
+        title: '布局六',
+        index: 6
+    }
+])
 /**
  * @description: 配置当前模块
  * @param {*} info
@@ -378,6 +466,12 @@ const changePlatform = () => {
     currentChoosePlatform.value = platformList.value.find(item => {
         return item.platformId === platformId.value
     })
+}
+/**
+ * @description: 切换选择的平台
+ */
+const onSelectPlat = id => {
+    platformId.value = id
 }
 /**
  * @description: 抽屉操作
@@ -439,10 +533,62 @@ const operate = type => {
     flex-wrap: nowrap;
     align-items: center;
     justify-content: space-between;
+    padding-left: 20px;
+    box-sizing: border-box;
     .title {
-        font-size: 20px;
-        font-weight: bold;
-        color: #fff;
+        width: 354px;
+        height: 33px;
+        text-shadow: 0px 2px 4px #024473;
+        position: relative;
+        background: url('@/assets/img/title-bg.png');
+        background-size: 100% 100%;
+        .gradient_text {
+            position: absolute;
+            width: 80px;
+            font-size: 20px;
+            color: #ffffff;
+            font-family: Microsoft YaHei;
+            font-weight: bold;
+            // background: linear-gradient(0deg, rgba(255, 255, 255, 1) 0%, #78ccff 100%);
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 50%, #78ccff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            top: 0;
+            left: 50%;
+            text-align: center;
+            transform: translateX(-50%);
+            z-index: 3;
+        }
+    }
+    .layout-options {
+        width: 100%;
+        padding: 0 100px;
+        box-sizing: border-box;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        .layout_item {
+            width: 40px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            cursor: pointer;
+            .layout_img {
+                width: 22px;
+                height: 22px;
+                margin-bottom: 10px;
+            }
+            .layout_title {
+                font-family: Microsoft YaHei;
+                font-weight: 400;
+                font-size: 12px;
+                color: #ffffff;
+                text-shadow: 0px 2px 4px #024473;
+                background: linear-gradient(0deg, rgba(255, 255, 255, 0.5) 0%, #78ccff 100%);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+            }
+        }
     }
     .layout-examples {
         width: 100%;
@@ -452,7 +598,8 @@ const operate = type => {
         .content {
             width: 100%;
             height: 100%;
-            border: 1px solid #18202b;
+            border: 1px solid #152e3f;
+            background: #061823;
             position: relative;
             .img {
                 width: 100%;
@@ -461,10 +608,10 @@ const operate = type => {
             .serial-number {
                 width: 50px;
                 height: 50px;
-                border: 2px solid red;
+                background: rgba(255, 255, 255, 0.1);
                 border-radius: 50%;
-                font-size: 20px;
-                font-weight: bold;
+                font-size: 28px;
+                font-weight: bolder;
                 color: #fff;
                 position: absolute;
                 top: 50%;
@@ -477,22 +624,35 @@ const operate = type => {
         width: 100%;
         height: 30%;
         .box-li {
-            width: 95%;
+            width: 100%;
+            height: 32px;
             margin: 10px auto;
             display: flex;
             flex-direction: row;
             flex-wrap: nowrap;
             align-items: center;
             justify-content: space-between;
+            padding: 0 20px;
+            box-sizing: border-box;
             .serial-number {
-                font-size: 16px;
-                font-weight: bold;
+                font-size: 14px;
                 color: #fff;
             }
             .name {
-                font-size: 16px;
+                font-size: 14px;
                 color: #fff;
             }
+        }
+        .box-li-default {
+            background: url('@/assets/img/module-default.png');
+            background-size: 100% 100%;
+        }
+        .box-li-selected {
+            background: url('@/assets/img/module-selected.png');
+            background-size: 100% 100%;
+        }
+        .box-li-img {
+            cursor: pointer;
         }
     }
     .footer-btn {
@@ -502,6 +662,18 @@ const operate = type => {
         flex-wrap: nowrap;
         align-items: center;
         justify-content: space-evenly;
+        .cancel-btn {
+            width: 119px;
+            height: 48px;
+            background: url('@/assets/img/cancel.png');
+            cursor: pointer;
+        }
+        .apply-btn {
+            width: 119px;
+            height: 48px;
+            background: url('@/assets/img/apply.png');
+            cursor: pointer;
+        }
     }
 
     .layout-examples-1 {
@@ -646,6 +818,9 @@ const operate = type => {
 }
 </style>
 <style lang="scss">
+.drawer-box {
+    padding: 0;
+}
 .inner-drawer-content {
     width: 100%;
     height: 100%;
@@ -658,24 +833,86 @@ const operate = type => {
         width: 100%;
         height: 95%;
         .platform-list {
-            width: 98%;
+            width: 100%;
             margin: 0 auto;
+            display: flex;
+            justify-content: flex-end;
+            flex-wrap: wrap;
+            box-sizing: border-box;
         }
         .box-li {
-            width: 100%;
-            height: 108px;
-            margin: 20px auto;
+            width: 95%;
+            margin-bottom: 20px;
+            padding: 10px 20px;
+            box-sizing: border-box;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
             .box-name {
-                width: 40%;
-                font-size: 16px;
+                width: 50%;
+                font-size: 14px;
+                line-height: 16px;
                 font-weight: bold;
                 color: #fff;
                 white-space: normal;
+                letter-spacing: 1px;
+                // width: 224px;
             }
             .box-img {
                 width: 192px;
                 height: 108px;
             }
+        }
+        .box-li-defaultbg {
+            background: linear-gradient(
+                90deg,
+                rgba(74, 198, 255, 0.02),
+                rgba(74, 198, 255, 0.1),
+                rgba(94, 169, 233, 0.02)
+            );
+            // border-top: 1px solid transparent;
+            // border-bottom: 1px solid transparent;
+        }
+        .box-li-activebg {
+            background: linear-gradient(
+                90deg,
+                rgba(74, 198, 255, 0.06),
+                rgba(74, 198, 255, 0.3),
+                rgba(94, 169, 233, 0.06)
+            );
+            position: relative;
+            // border-top: 1px solid;
+            // border-bottom: 1px solid;
+            // border-image: linear-gradient(90deg, #3de9ff, #3dcbff, #3de9ff) 1 1;
+        }
+        .box-li-activebg::before {
+            content: '';
+            position: absolute;
+            top: -1px;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(
+                to right,
+                rgba(255, 255, 255, 0) 10%,
+                #3dcbff 50%,
+                rgba(255, 255, 255, 0) 100%
+            );
+        }
+        .box-li-activebg::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(
+                to right,
+                rgba(255, 255, 255, 0) 10%,
+                #3dcbff 50%,
+                rgba(255, 255, 255, 0) 100%
+            );
         }
         .el-radio__label {
             width: 98%;
@@ -698,6 +935,20 @@ const operate = type => {
         flex-wrap: nowrap;
         align-items: center;
         justify-content: space-evenly;
+        .cancel-btn {
+            width: 119px;
+            height: 48px;
+            background: url('@/assets/img/cancel.png');
+            background-size: 100% 100%;
+            cursor: pointer;
+        }
+        .confirm-btn {
+            width: 119px;
+            height: 48px;
+            background: url('@/assets/img/confirm.png');
+            background-size: 100% 100%;
+            cursor: pointer;
+        }
     }
 }
 </style>

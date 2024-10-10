@@ -40,6 +40,7 @@
             />
         </el-drawer>
         <div class="options-box" @click="configureLayout(true)"></div>
+        <div class="fixed_right_side"></div>
     </div>
 </template>
 
@@ -229,13 +230,24 @@ function debounce(func, wait) {
     .options-box {
         width: 20px;
         height: 20px;
-        border: 1px solid seagreen;
         position: absolute;
         top: 50%;
         right: 0;
-        z-index: 20;
-        transform: translate(-50%, -50%);
+        z-index: 4;
+        transform: translateY(-50%);
         cursor: pointer;
+        background: url('@/assets/img/arrow.png') no-repeat;
+        background-size: 100%;
+    }
+    .fixed_right_side {
+        width: 79px;
+        height: 100%;
+        background: url('@/assets/img/right-side.png') no-repeat;
+        background-size: 100% 100%;
+        position: absolute;
+        top: 0;
+        right: 0;
+        z-index: 3;
     }
     .container-1 {
         /* 设置元素为网格容器 */
@@ -372,7 +384,9 @@ function debounce(func, wait) {
 </style>
 <style lang="scss">
 .drawer-box {
-    background-color: $bg-color;
+    // background-color: $bg-color;
+    background: url('@/assets/img/drawer-bg.png');
+    background-size: 100% 100%;
 }
 .el-button + .el-button {
     margin-left: 0;
