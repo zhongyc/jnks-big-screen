@@ -1,7 +1,7 @@
 <!--
  * @Author: liz
  * @Date: 2024-10-09 10:28:33
- * @LastEditTime: 2024-10-10 11:28:04
+ * @LastEditTime: 2024-10-11 10:46:19
  * @LastEditors: liz
  * @Description: 布局配置
  * @FilePath: \jnks-big-screen\src\views\Home\layoutConfiguration.vue
@@ -146,7 +146,8 @@ const urlList = ref([
         platformName: '',
         platformId: 0,
         bgUrl: '',
-        show: false
+        show: false,
+        name: 'modules1'
     },
     {
         uid: 2,
@@ -155,7 +156,8 @@ const urlList = ref([
         platformName: '',
         platformId: 0,
         bgUrl: '',
-        show: false
+        show: false,
+        name: 'modules2'
     },
     {
         uid: 3,
@@ -164,7 +166,8 @@ const urlList = ref([
         platformName: '',
         platformId: 0,
         bgUrl: '',
-        show: false
+        show: false,
+        name: 'modules4'
     },
     {
         uid: 4,
@@ -173,7 +176,8 @@ const urlList = ref([
         platformName: '',
         platformId: 0,
         bgUrl: '',
-        show: false
+        show: false,
+        name: 'modules4'
     }
 ])
 /**
@@ -202,7 +206,8 @@ const changeLayoutType = index => {
                             url: '',
                             platformName: '',
                             bgUrl: '',
-                            show: false
+                            show: false,
+                            name: 'modules5'
                         },
                         {
                             uid: 6,
@@ -210,7 +215,8 @@ const changeLayoutType = index => {
                             url: '',
                             platformName: '',
                             bgUrl: '',
-                            show: false
+                            show: false,
+                            name: 'modules6'
                         }
                     ]
                 )
@@ -226,7 +232,8 @@ const changeLayoutType = index => {
                             url: '',
                             platformName: '',
                             bgUrl: '',
-                            show: false
+                            show: false,
+                            name: 'modules5'
                         },
                         {
                             uid: 6,
@@ -234,7 +241,8 @@ const changeLayoutType = index => {
                             url: '',
                             platformName: '',
                             bgUrl: '',
-                            show: false
+                            show: false,
+                            name: 'modules6'
                         },
                         {
                             uid: 7,
@@ -242,7 +250,8 @@ const changeLayoutType = index => {
                             url: '',
                             platformName: '',
                             bgUrl: '',
-                            show: false
+                            show: false,
+                            name: 'modules7'
                         },
                         {
                             uid: 8,
@@ -250,7 +259,8 @@ const changeLayoutType = index => {
                             url: '',
                             platformName: '',
                             bgUrl: '',
-                            show: false
+                            show: false,
+                            name: 'modules8'
                         },
                         {
                             uid: 9,
@@ -258,7 +268,8 @@ const changeLayoutType = index => {
                             url: '',
                             platformName: '',
                             bgUrl: '',
-                            show: false
+                            show: false,
+                            name: 'modules9'
                         }
                     ]
                 )
@@ -271,7 +282,8 @@ const changeLayoutType = index => {
                             url: '',
                             platformName: '',
                             bgUrl: '',
-                            show: false
+                            show: false,
+                            name: 'modules7'
                         },
                         {
                             uid: 8,
@@ -279,7 +291,8 @@ const changeLayoutType = index => {
                             url: '',
                             platformName: '',
                             bgUrl: '',
-                            show: false
+                            show: false,
+                            name: 'modules8'
                         },
                         {
                             uid: 9,
@@ -287,7 +300,8 @@ const changeLayoutType = index => {
                             url: '',
                             platformName: '',
                             bgUrl: '',
-                            show: false
+                            show: false,
+                            name: 'modules9'
                         }
                     ]
                 )
@@ -459,19 +473,15 @@ const configuration = info => {
 }
 const platformId = ref('')
 const currentChoosePlatform = ref({})
-/**
- * @description: 切换选择的平台
- */
-const changePlatform = () => {
-    currentChoosePlatform.value = platformList.value.find(item => {
-        return item.platformId === platformId.value
-    })
-}
+
 /**
  * @description: 切换选择的平台
  */
 const onSelectPlat = id => {
     platformId.value = id
+    currentChoosePlatform.value = platformList.value.find(item => {
+        return item.platformId === platformId.value
+    })
 }
 /**
  * @description: 抽屉操作

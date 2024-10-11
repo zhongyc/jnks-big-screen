@@ -1,7 +1,7 @@
 <!--
  * @Author: liz
  * @Date: 2024-10-08 09:43:03
- * @LastEditTime: 2024-10-10 14:15:25
+ * @LastEditTime: 2024-10-11 09:40:50
  * @LastEditors: liz
  * @Description: 仪表盘
  * @FilePath: \jnks-big-screen\src\views\Home\index.vue
@@ -20,6 +20,7 @@
                 </div>
                 <iframe
                     :id="`bi_iframe_${item.index}`"
+                    :name="item.name"
                     :src="item.url == '' ? 'about:blank' : item.url"
                     frameborder="0"
                     @load="adjustIframe(item)"
@@ -74,7 +75,8 @@ const urlList = ref([
         url: '',
         platformName: '',
         bgUrl: '',
-        show: false
+        show: false,
+        name: 'modules1'
     },
     {
         uid: 2,
@@ -82,7 +84,8 @@ const urlList = ref([
         url: '',
         platformName: '',
         bgUrl: '',
-        show: false
+        show: false,
+        name: 'modules2'
     },
     {
         uid: 3,
@@ -90,7 +93,8 @@ const urlList = ref([
         url: '',
         platformName: '',
         bgUrl: '',
-        show: false
+        show: false,
+        name: 'modules3'
     },
     {
         uid: 4,
@@ -98,7 +102,8 @@ const urlList = ref([
         url: '',
         platformName: '',
         bgUrl: '',
-        show: false
+        show: false,
+        name: 'modules4'
     }
 ])
 /**
@@ -106,8 +111,11 @@ const urlList = ref([
  * @param {*} info
  */
 const adjustIframe = info => {
+    let iframe = document.getElementById(`bi_iframe_${info.index}`)
+    if (info.url) {
+        iframe.contentWindow.postMessage(`modules_${info.index}`, info.url)
+    }
     setTimeout(() => {
-        let iframe = document.getElementById(`bi_iframe_${info.index}`)
         if (iframe.src != 'about:blank') {
             let parentContainer = document.querySelector(`.content-${info.index}`)
             //   获取父级容器的宽高
