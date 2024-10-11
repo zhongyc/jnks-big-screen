@@ -233,7 +233,7 @@ function debounce(func, wait) {
         position: absolute;
         top: 50%;
         right: 0;
-        z-index: 4;
+        z-index: 11;
         transform: translateY(-50%);
         cursor: pointer;
         background: url('@/assets/img/arrow.png') no-repeat;
@@ -247,7 +247,7 @@ function debounce(func, wait) {
         position: absolute;
         top: 0;
         right: 0;
-        z-index: 3;
+        z-index: 10;
     }
     .container-1 {
         /* 设置元素为网格容器 */

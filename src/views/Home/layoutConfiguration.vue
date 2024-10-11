@@ -549,11 +549,10 @@ const operate = type => {
             color: #ffffff;
             font-family: Microsoft YaHei;
             font-weight: bold;
-            // background: linear-gradient(0deg, rgba(255, 255, 255, 1) 0%, #78ccff 100%);
-            background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 50%, #78ccff 100%);
+            background: linear-gradient(180deg, rgba(255, 255, 255, 1) 50%, #78ccff 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            top: 0;
+            top: -5px;
             left: 50%;
             text-align: center;
             transform: translateX(-50%);
