@@ -1,7 +1,7 @@
 <!--
  * @Author: liz
  * @Date: 2024-10-09 10:28:33
- * @LastEditTime: 2024-10-11 10:46:19
+ * @LastEditTime: 2024-10-11 14:26:20
  * @LastEditors: liz
  * @Description: 布局配置
  * @FilePath: \jnks-big-screen\src\views\Home\layoutConfiguration.vue
@@ -23,14 +23,6 @@
             </div>
         </div>
         <div class="layout-options">
-            <!-- <el-radio-group v-model="examplesLayoutOption" @change="changeLayout">
-                <el-radio-button label="布局一" value="1" />
-                <el-radio-button label="布局二" value="2" />
-                <el-radio-button label="布局二" value="3" />
-                <el-radio-button label="布局四" value="4" />
-                <el-radio-button label="布局五" value="5" />
-                <el-radio-button label="布局六" value="6" />
-            </el-radio-group> -->
             <template v-for="item in layoutList" :key="item.index">
                 <div class="layout_item" @click="changeLayoutType(item.index)">
                     <img
@@ -315,23 +307,23 @@ const innerDrawer = ref(false) // 平台模块分配 抽屉
 const currentChooseUid = ref('') // 当前配置 模块 uid
 const platformList = ref([
     {
-        url: 'https://www.zjjnks.cn/swat/hangzhou/navigation',
+        url: 'http://10.1.0.5:8080/#/navigation',
         platformName: '杭州市公安局低空安保指挥调度平台',
         bgUrl: 'platformImg/swat-hangzhou.png',
         platformId: 1
     },
-    // {
-    //     url: 'https://www.zjjnks.cn/swat/zhoushan/DailyInspection',
-    //     platformName: '舟山市公安局无人机监管平台',
-    //     bgUrl: 'platformImg/swat-zhoushan.png',
-    //     platformId: 2
-    // },
-    // {
-    //     url: 'https://www.zjjnks.cn/swat/westlake/command',
-    //     platformName: '浙江省杭州市民用无人机公共安全监管平台',
-    //     bgUrl: 'platformImg/swat-westlake.png',
-    //     platformId: 3
-    // },
+    {
+        url: 'https://www.zjjnks.cn/swat/zhoushan/DailyInspection',
+        platformName: '舟山市公安局无人机监管平台',
+        bgUrl: 'platformImg/swat-zhoushan.png',
+        platformId: 2
+    },
+    {
+        url: 'https://www.zjjnks.cn/swat/westlake/command',
+        platformName: '浙江省杭州市民用无人机公共安全监管平台',
+        bgUrl: 'platformImg/swat-westlake.png',
+        platformId: 3
+    },
     {
         url: 'https://www.zjjnks.cn/keyunit/',
         platformName: '重点区域（单位）无人机公共安全监管指控系统',
@@ -344,54 +336,54 @@ const platformList = ref([
         bgUrl: 'platformImg/keyArea.png',
         platformId: 5
     },
-    // {
-    //     url: 'https://www.zjjnks.cn/province/cockpit',
-    //     platformName: '浙江省民用无人机公共监管平台',
-    //     bgUrl: 'platformImg/province.png',
-    //     platformId: 6
-    // },
-    // {
-    //     url: 'https://www.zjjnks.cn/asianGames/command',
-    //     platformName: '2022杭州亚运低空安全监管平台',
-    //     bgUrl: 'platformImg/asianGames.png',
-    //     platformId: 7
-    // },
-    // {
-    //     url: 'https://www.zjjnks.cn/asianGames/district/command',
-    //     platformName: '2022杭州亚运低空安全监管平台(区平台)',
-    //     bgUrl: 'platformImg/asianGames-district.png',
-    //     platformId: 8
-    // },
-    // {
-    //     url: 'https://www.zjjnks.cn/asianGames/city/command',
-    //     platformName: '2022杭州亚运低空安全监管平台(市平台)',
-    //     bgUrl: 'platformImg/asianGames-city.png',
-    //     platformId: 9
-    // },
-    // {
-    //     url: 'https://www.zjjnks.cn/asianGames/province/cockpit',
-    //     platformName: '2022杭州亚运低空安全监管平台(省平台)',
-    //     bgUrl: 'platformImg/asianGames-province.png',
-    //     platformId: 10
-    // },
-    // {
-    //     url: 'https://www.zjjnks.cn/asianWinterGames/command',
-    //     platformName: '哈尔滨市民用无人机监管平台',
-    //     bgUrl: 'platformImg/asianWinterGames.png',
-    //     platformId: 11
-    // },
-    // {
-    //     url: 'https://www.zjjnks.cn/patrolPolice/',
-    //     platformName: '巡特警指挥调度平台',
-    //     bgUrl: 'platformImg/patrolPolice.png',
-    //     platformId: 12
-    // },
-    // {
-    //     url: 'https://www.zjjnks.cn/airservices',
-    //     platformName: '麒云低空服务管理系统',
-    //     bgUrl: 'platformImg/airservices.png',
-    //     platformId: 13
-    // },
+    {
+        url: 'https://www.zjjnks.cn/province/cockpit',
+        platformName: '浙江省民用无人机公共监管平台',
+        bgUrl: 'platformImg/province.png',
+        platformId: 6
+    },
+    {
+        url: 'https://www.zjjnks.cn/asianGames/command',
+        platformName: '2022杭州亚运低空安全监管平台',
+        bgUrl: 'platformImg/asianGames.png',
+        platformId: 7
+    },
+    {
+        url: 'https://www.zjjnks.cn/asianGames/district/command',
+        platformName: '2022杭州亚运低空安全监管平台(区平台)',
+        bgUrl: 'platformImg/asianGames-district.png',
+        platformId: 8
+    },
+    {
+        url: 'https://www.zjjnks.cn/asianGames/city/command',
+        platformName: '2022杭州亚运低空安全监管平台(市平台)',
+        bgUrl: 'platformImg/asianGames-city.png',
+        platformId: 9
+    },
+    {
+        url: 'https://www.zjjnks.cn/asianGames/province/cockpit',
+        platformName: '2022杭州亚运低空安全监管平台(省平台)',
+        bgUrl: 'platformImg/asianGames-province.png',
+        platformId: 10
+    },
+    {
+        url: 'https://www.zjjnks.cn/asianWinterGames/command',
+        platformName: '哈尔滨市民用无人机监管平台',
+        bgUrl: 'platformImg/asianWinterGames.png',
+        platformId: 11
+    },
+    {
+        url: 'https://www.zjjnks.cn/patrolPolice/',
+        platformName: '巡特警指挥调度平台',
+        bgUrl: 'platformImg/patrolPolice.png',
+        platformId: 12
+    },
+    {
+        url: 'https://www.zjjnks.cn/airservices',
+        platformName: '麒云低空服务管理系统',
+        bgUrl: 'platformImg/airservices.png',
+        platformId: 13
+    },
     {
         url: 'https://www.zjjnks.cn/gov-air-service',
         platformName: '临平区低空飞行控制系统',
@@ -403,13 +395,13 @@ const platformList = ref([
         platformName: '杰能科世运营可视化看板',
         bgUrl: 'platformImg/nationwide.png',
         platformId: 15
+    },
+    {
+        url: 'https://www.zjjnks.cn/jnksfkwz/#/chart',
+        platformName: '重点目标单位督查抄报平台全景舱',
+        bgUrl: 'platformImg/jnksfkwzChart.png',
+        platformId: 16
     }
-    // {
-    //     url: 'https://www.zjjnks.cn/jnksfkwz/#/chart',
-    //     platformName: '重点目标单位督查抄报平台全景舱',
-    //     bgUrl: 'platformImg/jnksfkwzChart.png',
-    //     platformId: 16
-    // }
     // {
     //     url: 'http://61.191.199.84:18080/keyArea/login?key=66ba85aba5e651bcef4b7a8f795469489ebebf72bca5a960b478423d3fe42cfd116c8023b7cc0de80324b9c02d96ca9f',
     //     platformName: '安徽奥体试点',
@@ -570,8 +562,9 @@ const operate = type => {
         }
     }
     .layout-options {
-        width: 100%;
-        padding: 0 100px;
+        width: 74%;
+        height: 44px;
+        // padding: 0 100px;
         box-sizing: border-box;
         display: flex;
         align-items: center;

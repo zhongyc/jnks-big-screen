@@ -1,7 +1,7 @@
 <!--
  * @Author: liz
  * @Date: 2024-10-08 09:43:03
- * @LastEditTime: 2024-10-11 09:40:50
+ * @LastEditTime: 2024-10-11 14:22:52
  * @LastEditors: liz
  * @Description: 仪表盘
  * @FilePath: \jnks-big-screen\src\views\Home\index.vue
@@ -247,8 +247,18 @@ function debounce(func, wait) {
         background: url('@/assets/img/arrow.png') no-repeat;
         background-size: 100%;
     }
+    .options-box:hover + .fixed_right_side {
+        /* 设置初始位置 */
+        transform: translateX(0);
+        /* 设置过渡效果 */
+        transition:
+            transform 0.5s ease,
+            opacity 0.5s ease;
+        /* 初始透明度 */
+        opacity: 1;
+    }
     .fixed_right_side {
-        width: 79px;
+        width: 36px;
         height: 100%;
         background: url('@/assets/img/right-side.png') no-repeat;
         background-size: 100% 100%;
@@ -256,6 +266,9 @@ function debounce(func, wait) {
         top: 0;
         right: 0;
         z-index: 10;
+        transform: translateX(100%);
+        /* 渐隐效果 */
+        opacity: 0;
     }
     .container-1 {
         /* 设置元素为网格容器 */
