@@ -538,7 +538,7 @@ const operate = type => {
     .title {
         width: 354px;
         height: 33px;
-        text-shadow: 0px 2px 4px #024473;
+        // text-shadow: 0px 2px 4px #024473;
         position: relative;
         background: url('@/assets/img/title-bg.png');
         background-size: 100% 100%;
@@ -549,10 +549,10 @@ const operate = type => {
             color: #ffffff;
             font-family: Microsoft YaHei;
             font-weight: bold;
-            background: linear-gradient(180deg, rgba(255, 255, 255, 1) 50%, #78ccff 100%);
+            background: linear-gradient(180deg, rgba(255, 255, 255, 1) 20%, #78ccff 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            top: -5px;
+            top: -4px;
             left: 50%;
             text-align: center;
             transform: translateX(-50%);
