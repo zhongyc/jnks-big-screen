@@ -1,7 +1,7 @@
 <!--
  * @Author: liz
  * @Date: 2024-10-08 09:43:03
- * @LastEditTime: 2024-10-11 14:22:52
+ * @LastEditTime: 2024-10-12 13:32:03
  * @LastEditors: liz
  * @Description: 仪表盘
  * @FilePath: \jnks-big-screen\src\views\Home\index.vue
@@ -23,6 +23,7 @@
                     :name="item.name"
                     :src="item.url == '' ? 'about:blank' : item.url"
                     frameborder="0"
+                    :data-custom-attr="`modules_${item.index}`"
                     @load="adjustIframe(item)"
                 ></iframe>
             </div>
@@ -112,9 +113,6 @@ const urlList = ref([
  */
 const adjustIframe = info => {
     let iframe = document.getElementById(`bi_iframe_${info.index}`)
-    if (info.url) {
-        iframe.contentWindow.postMessage(`modules_${info.index}`, info.url)
-    }
     setTimeout(() => {
         if (iframe.src != 'about:blank') {
             let parentContainer = document.querySelector(`.content-${info.index}`)
