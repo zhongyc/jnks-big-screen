@@ -1,7 +1,7 @@
 <!--
  * @Author: liz
  * @Date: 2024-10-09 10:28:33
- * @LastEditTime: 2024-10-11 14:26:20
+ * @LastEditTime: 2024-10-11 19:10:52
  * @LastEditors: liz
  * @Description: 布局配置
  * @FilePath: \jnks-big-screen\src\views\Home\layoutConfiguration.vue
@@ -50,8 +50,8 @@
                     class="box-li-img"
                     src="@/assets/img/detail.png"
                     alt=""
-                    @click="configuration(item)"
                     title="选择平台"
+                    @click="configuration(item)"
                 />
                 <!-- <el-button type="primary" :icon="'Operation'" circle @click="configuration(item)" /> -->
             </div>
@@ -187,9 +187,9 @@ const changeLayoutType = index => {
         case 3:
         case 4:
         case 5:
-            if (urlList.value.length > 6) {
+            if (urlList.value.length == 9) {
                 urlList.value.splice(6)
-            } else {
+            } else if (urlList.value.length == 4) {
                 urlList.value.push(
                     ...[
                         {
@@ -307,7 +307,7 @@ const innerDrawer = ref(false) // 平台模块分配 抽屉
 const currentChooseUid = ref('') // 当前配置 模块 uid
 const platformList = ref([
     {
-        url: 'http://10.1.0.5:8080/#/navigation',
+        url: 'https://www.zjjnks.cn/swat/hangzhou/navigation',
         platformName: '杭州市公安局低空安保指挥调度平台',
         bgUrl: 'platformImg/swat-hangzhou.png',
         platformId: 1
@@ -552,6 +552,7 @@ const operate = type => {
             font-family: Microsoft YaHei;
             font-weight: bold;
             background: linear-gradient(180deg, rgba(255, 255, 255, 1) 20%, #78ccff 100%);
+            background-clip: text;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             top: -4px;
@@ -587,6 +588,7 @@ const operate = type => {
                 color: #ffffff;
                 text-shadow: 0px 2px 4px #024473;
                 background: linear-gradient(0deg, rgba(255, 255, 255, 0.5) 0%, #78ccff 100%);
+                background-clip: text;
                 -webkit-background-clip: text;
                 -webkit-text-fill-color: transparent;
             }

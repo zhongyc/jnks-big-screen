@@ -22,8 +22,7 @@ const onWindowResize = () => {
 <template>
     <div id="app-box">
         <RouterView />
-        <div class="support">技术支持©杰能科世智能安全科技(杭州)有限公司</div>
-        <audio id="eventAudio" autoplay="autoplay" src></audio>
+        <!-- <div class="support">技术支持©杰能科世智能安全科技(杭州)有限公司</div> -->
     </div>
 </template>
 <style lang="scss">
