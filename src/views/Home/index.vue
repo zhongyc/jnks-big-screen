@@ -1,14 +1,14 @@
 <!--
  * @Author: liz
  * @Date: 2024-10-08 09:43:03
- * @LastEditTime: 2024-10-12 13:32:03
+ * @LastEditTime: 2024-10-15 17:11:22
  * @LastEditors: liz
  * @Description: 仪表盘
  * @FilePath: \jnks-big-screen\src\views\Home\index.vue
 -->
 <template>
     <div class="container-box">
-        <div class="container" :class="`container-${layoutExamplesId}`">
+        <div v-if="!isFullScreen" class="container" :class="`container-${layoutExamplesId}`">
             <div
                 v-for="item in urlList"
                 :key="item.uid"
@@ -26,6 +26,20 @@
                     :data-custom-attr="`modules_${item.index}`"
                     @load="adjustIframe(item)"
                 ></iframe>
+                <div class="full-screen-1" @dblclick="changeLayout(true, item)"></div>
+            </div>
+        </div>
+        <div v-if="isFullScreen" class="container">
+            <div class="content" :class="`content-${fullScreenInfo.index}`">
+                <iframe
+                    :id="`bi_iframe_${fullScreenInfo.index}`"
+                    :name="fullScreenInfo.name"
+                    :src="fullScreenInfo.url"
+                    frameborder="0"
+                    :data-custom-attr="`modules_${fullScreenInfo.index}`"
+                    @load="adjustIframe(fullScreenInfo)"
+                ></iframe>
+                <div class="full-screen-2" @dblclick="changeLayout(false)"></div>
             </div>
         </div>
         <el-drawer
@@ -51,9 +65,13 @@ import { ref, onMounted, watch, onBeforeUnmount } from 'vue'
 import LayoutConfiguration from './layoutConfiguration.vue'
 import { useIndustryStore } from '@/store/app.js'
 const industryStore = useIndustryStore()
-
+const isFullScreen = ref(false)
+const fullScreenInfo = ref({})
 const debounceReload = debounce(() => {
-    location.reload()
+    // location.reload()
+    urlList.value.forEach(item => {
+        adjustIframe(item)
+    })
 }, 200)
 
 watch(
@@ -163,6 +181,11 @@ const configureLayout = (type, isReload = false) => {
         }
     }
 }
+
+const changeLayout = (type, info = {}) => {
+    isFullScreen.value = type
+    fullScreenInfo.value = info
+}
 onMounted(() => {
     let configurationList = localStorage.getItem(
         'command_room_big_screnn_layout_configuration_list'
@@ -213,9 +236,10 @@ function debounce(func, wait) {
                 position: absolute;
                 top: 50%;
                 left: 50%;
+                transform: translate(-50%, -50%);
                 z-index: 2;
                 /* 初始不应用缩放 */
-                transform: none;
+                // transform: none;
                 transition: transform 0.2s ease;
                 /* 可选的过渡效果 */
             }
@@ -230,6 +254,26 @@ function debounce(func, wait) {
                 justify-content: center;
                 position: absolute;
                 z-index: 10;
+            }
+            .full-screen-1 {
+                width: 20%;
+                height: 5%;
+                position: absolute;
+                top: 0%;
+                left: 50%;
+                transform: translate(-50%, 0);
+                z-index: 5;
+                cursor: zoom-in;
+            }
+            .full-screen-2 {
+                width: 20%;
+                height: 5%;
+                position: absolute;
+                top: 0%;
+                left: 50%;
+                transform: translate(-50%, 0);
+                z-index: 5;
+                cursor: zoom-out;
             }
         }
     }

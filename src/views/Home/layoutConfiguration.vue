@@ -1,7 +1,7 @@
 <!--
  * @Author: liz
  * @Date: 2024-10-09 10:28:33
- * @LastEditTime: 2024-10-11 19:10:52
+ * @LastEditTime: 2024-10-14 10:06:46
  * @LastEditors: liz
  * @Description: 布局配置
  * @FilePath: \jnks-big-screen\src\views\Home\layoutConfiguration.vue
@@ -312,18 +312,18 @@ const platformList = ref([
         bgUrl: 'platformImg/swat-hangzhou.png',
         platformId: 1
     },
-    {
-        url: 'https://www.zjjnks.cn/swat/zhoushan/DailyInspection',
-        platformName: '舟山市公安局无人机监管平台',
-        bgUrl: 'platformImg/swat-zhoushan.png',
-        platformId: 2
-    },
-    {
-        url: 'https://www.zjjnks.cn/swat/westlake/command',
-        platformName: '浙江省杭州市民用无人机公共安全监管平台',
-        bgUrl: 'platformImg/swat-westlake.png',
-        platformId: 3
-    },
+    // {
+    //     url: 'https://www.zjjnks.cn/swat/zhoushan/DailyInspection',
+    //     platformName: '舟山市公安局无人机监管平台',
+    //     bgUrl: 'platformImg/swat-zhoushan.png',
+    //     platformId: 2
+    //  },
+    //  {
+    //      url: 'https://www.zjjnks.cn/swat/westlake/command',
+    //      platformName: '浙江省杭州市民用无人机公共安全监管平台',
+    //      bgUrl: 'platformImg/swat-westlake.png',
+    //      platformId: 3
+    //  },
     {
         url: 'https://www.zjjnks.cn/keyunit/',
         platformName: '重点区域（单位）无人机公共安全监管指控系统',
@@ -348,24 +348,24 @@ const platformList = ref([
         bgUrl: 'platformImg/asianGames.png',
         platformId: 7
     },
-    {
-        url: 'https://www.zjjnks.cn/asianGames/district/command',
-        platformName: '2022杭州亚运低空安全监管平台(区平台)',
-        bgUrl: 'platformImg/asianGames-district.png',
-        platformId: 8
-    },
-    {
-        url: 'https://www.zjjnks.cn/asianGames/city/command',
-        platformName: '2022杭州亚运低空安全监管平台(市平台)',
-        bgUrl: 'platformImg/asianGames-city.png',
-        platformId: 9
-    },
-    {
-        url: 'https://www.zjjnks.cn/asianGames/province/cockpit',
-        platformName: '2022杭州亚运低空安全监管平台(省平台)',
-        bgUrl: 'platformImg/asianGames-province.png',
-        platformId: 10
-    },
+    // {
+    //     url: 'https://www.zjjnks.cn/asianGames/district/command',
+    //     platformName: '2022杭州亚运低空安全监管平台(区平台)',
+    //     bgUrl: 'platformImg/asianGames-district.png',
+    //     platformId: 8
+    // },
+    // {
+    //     url: 'https://www.zjjnks.cn/asianGames/city/command',
+    //     platformName: '2022杭州亚运低空安全监管平台(市平台)',
+    //     bgUrl: 'platformImg/asianGames-city.png',
+    //     platformId: 9
+    // },
+    // {
+    //     url: 'https://www.zjjnks.cn/asianGames/province/cockpit',
+    //     platformName: '2022杭州亚运低空安全监管平台(省平台)',
+    //     bgUrl: 'platformImg/asianGames-province.png',
+    //     platformId: 10
+    // },
     {
         url: 'https://www.zjjnks.cn/asianWinterGames/command',
         platformName: '哈尔滨市民用无人机监管平台',
