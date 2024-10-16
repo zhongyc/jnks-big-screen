@@ -50,7 +50,7 @@ export default defineConfig(({ mode }) => {
         // build打包构建配置
         build: {
             // 输出目录，默认是 dist 打包文件的输出目录
-            outDir: 'dist',
+            outDir: env.VITE_BASE_OUT_DIR,
             assetsDir: 'static',
             brotliSize: false, // 关闭打包过程中计算包的大小
             cssCodeSplit: true, //启用/禁用 CSS 代码拆分
