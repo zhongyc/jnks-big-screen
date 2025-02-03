@@ -1,7 +1,7 @@
 <!--
  * @Author: liz
  * @Date: 2024-10-09 10:28:33
- * @LastEditTime: 2024-10-14 10:06:46
+ * @LastEditTime: 2025-02-03 10:41:08
  * @LastEditors: liz
  * @Description: 布局配置
  * @FilePath: \jnks-big-screen\src\views\Home\layoutConfiguration.vue
@@ -401,6 +401,12 @@ const platformList = ref([
         platformName: '重点目标单位督查抄报平台全景舱',
         bgUrl: 'platformImg/jnksfkwzChart.png',
         platformId: 16
+    },
+    {
+        url: 'https://harbin.zjjnks.cn:20001/asianGames',
+        platformName: '哈尔滨市民用无人机监管平台',
+        bgUrl: 'platformImg/hrb-asian-games.png',
+        platformId: 17
     }
     // {
     //     url: 'http://61.191.199.84:18080/keyArea/login?key=66ba85aba5e651bcef4b7a8f795469489ebebf72bca5a960b478423d3fe42cfd116c8023b7cc0de80324b9c02d96ca9f',
